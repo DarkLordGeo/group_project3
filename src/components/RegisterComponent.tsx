@@ -145,10 +145,10 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                                    setRole(e. target.value)
-                                    
-                                }}
+                                // onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                //     setRole(e. target.value)
+
+                                // }}
                             // onChange={handleChange}
                             >
                                 <MenuItem value={'admin'}>admin</MenuItem>
