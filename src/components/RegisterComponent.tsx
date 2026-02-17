@@ -106,11 +106,11 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
         });
     };
 
-    const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        // console.log(e.target.value)
-        setRole(e.target.value)
-        
-    }
+    // const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    //     // console.log(e.target.value)
+    //     setRole(e.target.value)
+
+    // }
     console.log(role)
 
     return (
@@ -145,7 +145,10 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                onChange={handleRoleChange}
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                    setRole(e. target.value)
+                                    
+                                }}
                             // onChange={handleChange}
                             >
                                 <MenuItem value={'admin'}>admin</MenuItem>
