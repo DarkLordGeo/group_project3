@@ -12,7 +12,7 @@ interface MainRouteProps {
 
 
 
-const Router: React.FC<MainRouteProps> = ({ route }) => {
+const Router: React.FC<MainRouteProps> = ({  }) => {
 
     return (
         <Routes>

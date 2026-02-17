@@ -51,6 +51,7 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
     const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
     const [nameError, setNameError] = React.useState(false);
     const [nameErrorMessage, setNameErrorMessage] = React.useState('');
+    console.log(props)
 
     const [role, setRole] = useState<string>('')
 
@@ -105,9 +106,10 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
         });
     };
 
-    const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         // console.log(e.target.value)
         setRole(e.target.value)
+        
     }
     console.log(role)
 
