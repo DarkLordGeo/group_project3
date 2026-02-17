@@ -1,17 +1,17 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
+// import CssBaseline from '@mui/material/CssBaseline';
+// import Divider from '@mui/material/Divider';
+// import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
-import { useState } from 'react';
+// import { useState } from 'react';
 import FormControl from '@mui/material/FormControl';
 // import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
+// import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router';
@@ -53,7 +53,7 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
     const [nameErrorMessage, setNameErrorMessage] = React.useState('');
     console.log(props)
 
-    const [role, setRole] = useState<string>('')
+    // const [role, setRole] = useState<string>('')
 
     const validateInputs = () => {
         const email = document.getElementById('email') as HTMLInputElement;
@@ -111,7 +111,7 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
     //     setRole(e.target.value)
 
     // }
-    console.log(role)
+    // console.log(role)
 
     return (
         <>
@@ -249,7 +249,7 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
                             </FormControl>
                         </Box>
 
-                        {role === 'user' &&
+                        {/* {role === 'user' &&
                             <FormControl>
                                 <FormLabel htmlFor="email">Address</FormLabel>
                                 <TextField
@@ -288,8 +288,7 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
                                     <Button variant='contained' color='secondary'>Add days +</Button>
                                 </Box>
                             </div>
-
-                        }
+                        } */}
                         <Button
                             type="submit"
                             fullWidth
