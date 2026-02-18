@@ -1,5 +1,5 @@
 import React from 'react'
-import RegisterComponent from '../components/RegisterComponent.tsx';
+import RegisterComponent from '../components/AuthentificationPage/RegisterComponent.tsx';
 
 // import { styled } from '@mui/material/styles';
 // import Grid from '@mui/material/Grid';

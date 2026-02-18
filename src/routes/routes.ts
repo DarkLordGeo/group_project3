@@ -11,5 +11,7 @@ export interface RoutesInterface {
 
 export const routes: RoutesInterface[] = [
     { path: '/login', label: 'create new account' },
-    { path: '/register', label: 'Sign in' }
+    { path: '/register', label: 'Sign in' },
+    { path: '/dashboard', label: 'dashboard' }
+
 ]

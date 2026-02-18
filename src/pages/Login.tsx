@@ -13,7 +13,7 @@ import Box from '@mui/material/Box';
 
 
 
-import SignUpComponent from   '../components/SignUpComponent.tsx'
+import SignUpComponent from   '../components/AuthentificationPage/SignUpComponent.tsx'
  
 
 
