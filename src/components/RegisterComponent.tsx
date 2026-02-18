@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { useId } from 'react';
+// import { useId } from 'react';
+// import { useEffect } from 'react';
 // import Checkbox from '@mui/material/Checkbox';
 // import CssBaseline from '@mui/material/CssBaseline';
 // import Divider from '@mui/material/Divider';
@@ -20,12 +21,12 @@ import { Link } from 'react-router';
 import Select from '@mui/material/Select';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 // import IconButton from '@mui/material/IconButton';
 // import AppTheme from './theme/AppTheme';
 // import ColorModeSelect from './theme/ColorModeSelect';
 // import { GoogleIcon, FacebookIcon, SitemarkIcon } from './components/CustomIcons';
-
+// import UUID from 'react'
 const Card = styled(MuiCard)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -46,13 +47,9 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 interface WorkScheduleInterface {
-    work_day: number,
-    work_day_id: string
-    date: {
-        day: string,
-        from: string,
-        to: string
-    }
+    day: string,
+    from: string,
+    to: string
 }
 
 
@@ -63,25 +60,27 @@ export default function RegisterComponent() {
     const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
     const [nameError, setNameError] = React.useState(false);
     const [nameErrorMessage, setNameErrorMessage] = React.useState('');
-    // console.log(props)
 
     const [role, setRole] = useState<string>('')
+    const [schedule, setSchedule] = useState<WorkScheduleInterface[]>([{ day: '', from: '', to: '' }])
 
-    const initialState = { work_day: 0, work_day_id: '', date: { day: '', from: '', to: '' } }
-
-    const [schedule, setSchedule] = useState<WorkScheduleInterface>(initialState)
-    // const 
-    // console.log(schedule)
-    const id = useId()
     const setUpSchedules = () => {
+        // setSchedule({ ...schedule, [work_day: schedule.work_day + 1] })
+        setSchedule([...schedule, {
+            day: '',
+            from: '',
+            to: ''
+        }])
         // setSchedule({...schedule, work_day: schedule.work_day += 1})
         // , date: { day: '', from: '', to: '' }
-        setSchedule({ ...schedule, work_day: schedule.work_day += 1, work_day_id: schedule.work_day_id = id })
+        // setSchedule({ ...schedule, work_day: schedule.work_day += 1, work_day_id: schedule.work_day_id = id })
     }
 
-    const removeSchedule = () => {
-        // continue
-        console.log(schedule.work_day_id)
+    const removeSchedule = (id: number) => {
+        // console.log(schedule.work_day)
+        const removedSchedule = schedule.filter((_, index) => index !== id)
+        // console.log(schedule)
+        setSchedule(removedSchedule)
     }
     // console.log(schedule)
     // console.log(Array(schedule.work_day).fill(0))
@@ -317,7 +316,8 @@ export default function RegisterComponent() {
                                 
                                 </Box> */}
                                 <Box mt={2} width={1}>
-                                    {Array(schedule.work_day).fill(0).map((item) => (
+
+                                    {schedule.map((item, id) => (
                                         <Box sx={{ display: 'flex', justifyContent: 'space-evenly', gap: 0, alignItems: 'center' }}>
                                             <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, alignItems: 'center' }}>
                                                 <FormControl fullWidth>
@@ -336,6 +336,7 @@ export default function RegisterComponent() {
                                                 <FormControl fullWidth>
                                                     <FormLabel>Select date</FormLabel>
                                                     <Select
+
                                                     // value={role}
                                                     // onChange={handleRoleChange}
                                                     >
@@ -345,6 +346,7 @@ export default function RegisterComponent() {
                                                     <FormLabel>Select date</FormLabel>
                                                     <Select
                                                     // value={role}
+
                                                     // onChange={handleRoleChange}
                                                     >
                                                         <MenuItem>monday</MenuItem>
@@ -356,7 +358,9 @@ export default function RegisterComponent() {
                                                 </FormControl>
                                             </Box>
                                             <Box>
-                                                <Button variant="contained" color="error" onClick={removeSchedule}>
+                                                <Button variant="contained" color="error" onClick={() => {
+                                                    removeSchedule(id)
+                                                }}>
                                                     Delete
                                                 </Button>
                                             </Box>
