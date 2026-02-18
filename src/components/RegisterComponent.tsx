@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { useId } from 'react';
 // import Checkbox from '@mui/material/Checkbox';
 // import CssBaseline from '@mui/material/CssBaseline';
 // import Divider from '@mui/material/Divider';
@@ -16,9 +17,11 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router';
 
-import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
+import type { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import { useState } from 'react';
+// import IconButton from '@mui/material/IconButton';
 // import AppTheme from './theme/AppTheme';
 // import ColorModeSelect from './theme/ColorModeSelect';
 // import { GoogleIcon, FacebookIcon, SitemarkIcon } from './components/CustomIcons';
@@ -42,23 +45,54 @@ const Card = styled(MuiCard)(({ theme }) => ({
     }),
 }));
 
+interface WorkScheduleInterface {
+    work_day: number,
+    work_day_id: string
+    date: {
+        day: string,
+        from: string,
+        to: string
+    }
+}
 
 
-export default function RegisterComponent(props: { disableCustomTheme?: boolean }) {
+export default function RegisterComponent() {
     const [emailError, setEmailError] = React.useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
     const [passwordError, setPasswordError] = React.useState(false);
     const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
     const [nameError, setNameError] = React.useState(false);
     const [nameErrorMessage, setNameErrorMessage] = React.useState('');
-    console.log(props)
+    // console.log(props)
 
-    // const [role, setRole] = useState<string>('')
+    const [role, setRole] = useState<string>('')
 
+    const initialState = { work_day: 0, work_day_id: '', date: { day: '', from: '', to: '' } }
+
+    const [schedule, setSchedule] = useState<WorkScheduleInterface>(initialState)
+    // const 
+    // console.log(schedule)
+    const id = useId()
+    const setUpSchedules = () => {
+        // setSchedule({...schedule, work_day: schedule.work_day += 1})
+        // , date: { day: '', from: '', to: '' }
+        setSchedule({ ...schedule, work_day: schedule.work_day += 1, work_day_id: schedule.work_day_id = id })
+    }
+
+    const removeSchedule = () => {
+        // continue
+        console.log(schedule.work_day_id)
+    }
+    // console.log(schedule)
+    // console.log(Array(schedule.work_day).fill(0))
     const validateInputs = () => {
         const email = document.getElementById('email') as HTMLInputElement;
         const password = document.getElementById('password') as HTMLInputElement;
         const name = document.getElementById('name') as HTMLInputElement;
+        // const select = document.getElementById('select_role') as HTMLSelectElement
+        // const select = document.get
+        // setRole(select.value)
+        // console.log(select.value)
 
         let isValid = true;
 
@@ -92,26 +126,23 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
         return isValid;
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        if (nameError || emailError || passwordError) {
-            event.preventDefault();
-            return;
-        }
-        const data = new FormData(event.currentTarget);
-        console.log({
-            name: data.get('name'),
-            lastName: data.get('lastName'),
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+    // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    //     if (nameError || emailError || passwordError) {
+    //         event.preventDefault();
+    //         return;
+    //     }
+    //     const data = new FormData(event.currentTarget);
+    //     console.log({
+    //         name: data.get('name'),
+    //         lastName: data.get('lastName'),
+    //         email: data.get('email'),
+    //         password: data.get('password'),
+    //     });
+    // };
 
-    // const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    //     // console.log(e.target.value)
-    //     setRole(e.target.value)
-
-    // }
-    // console.log(role)
+    const handleRoleChange = (event: SelectChangeEvent) => {
+        setRole(event.target.value as string)
+    }
 
     return (
         <>
@@ -137,19 +168,14 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
                     </Typography>
                     <Box
                         component="form"
-                        onSubmit={handleSubmit}
+                        // onSubmit={handleSubmit}
                         sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
                     >
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Select role</InputLabel>
+                            <FormLabel>Select role</FormLabel>
                             <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                // onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                                //     setRole(e. target.value)
-
-                                // }}
-                            // onChange={handleChange}
+                                value={role}
+                                onChange={handleRoleChange}
                             >
                                 <MenuItem value={'admin'}>admin</MenuItem>
                                 <MenuItem value={'user'}>user</MenuItem>
@@ -249,7 +275,7 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
                             </FormControl>
                         </Box>
 
-                        {/* {role === 'user' &&
+                        {role === 'user' &&
                             <FormControl>
                                 <FormLabel htmlFor="email">Address</FormLabel>
                                 <TextField
@@ -268,11 +294,11 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
                         }
                         {role === 'courier' &&
                             <div>
-                                <FormControl sx={{ width: 'full' }}>
-                                    <FormLabel htmlFor="email" sx={{ width: 'full' }}>Vechile type</FormLabel>
+                                <FormControl sx={{ width: 1 }}>
+                                    <FormLabel htmlFor="email" >Vechile type</FormLabel>
                                     <TextField
                                         required
-                                        fullWidth
+                                        // fullWidth
                                         id="email"
                                         name="email"
                                         autoComplete="email"
@@ -284,11 +310,67 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
                                     />
                                 </FormControl>
                                 <Box sx={{ marginTop: '15px', display: 'flex', justifyContent: "space-evenly", textAlign: 'center' }}>
-                                    <Typography sx={{ textAlign: 'center' }}>Working schedule (max 5) </Typography>
-                                    <Button variant='contained' color='secondary'>Add days +</Button>
+                                    <Typography sx={{ textAlign: 'center' }}>Working Schedule (Min 5 days) </Typography>
+                                    <Button variant='contained' color='secondary' onClick={setUpSchedules}>Add days +</Button>
                                 </Box>
+                                {/* <Box mt={2}>
+                                
+                                </Box> */}
+                                <Box mt={2} width={1}>
+                                    {Array(schedule.work_day).fill(0).map((item) => (
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-evenly', gap: 0, alignItems: 'center' }}>
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, alignItems: 'center' }}>
+                                                <FormControl fullWidth>
+                                                    <FormLabel>Select date</FormLabel>
+                                                    <Select
+                                                    // value={role}
+                                                    // onChange={handleRoleChange}
+                                                    >
+                                                        <MenuItem>monday</MenuItem>
+                                                        <MenuItem>tuesday</MenuItem>
+                                                        <MenuItem>thursday</MenuItem>
+                                                        <MenuItem>friday</MenuItem>
+                                                        <MenuItem>sunday</MenuItem>
+                                                    </Select>
+                                                </FormControl>
+                                                <FormControl fullWidth>
+                                                    <FormLabel>Select date</FormLabel>
+                                                    <Select
+                                                    // value={role}
+                                                    // onChange={handleRoleChange}
+                                                    >
+                                                    </Select>
+                                                </FormControl>
+                                                <FormControl fullWidth>
+                                                    <FormLabel>Select date</FormLabel>
+                                                    <Select
+                                                    // value={role}
+                                                    // onChange={handleRoleChange}
+                                                    >
+                                                        <MenuItem>monday</MenuItem>
+                                                        <MenuItem>tuesday</MenuItem>
+                                                        <MenuItem>thursday</MenuItem>
+                                                        <MenuItem>friday</MenuItem>
+                                                        <MenuItem>sunday</MenuItem>
+                                                    </Select>
+                                                </FormControl>
+                                            </Box>
+                                            <Box>
+                                                <Button variant="contained" color="error" onClick={removeSchedule}>
+                                                    Delete
+                                                </Button>
+                                            </Box>
+                                        </Box>
+
+                                    ))}
+                                </Box>
+
+
+                                < div />
+
+
                             </div>
-                        } */}
+                        }
                         <Button
                             type="submit"
                             fullWidth
@@ -300,7 +382,7 @@ export default function RegisterComponent(props: { disableCustomTheme?: boolean 
                     </Box>
                     {/* conditionals */}
                 </Card>
-            </div>
+            </div >
 
         </>
 

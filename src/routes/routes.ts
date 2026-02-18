@@ -1,10 +1,12 @@
 // import Login from "../pages/Login"
 // import Register from "../pages/Register"
 
+// import type { ReactNode } from "react"
+
 export interface RoutesInterface {
     path: string,
     label: string,
-    // component: React.FC
+    // component: ReactNode
 }
 
 export const routes: RoutesInterface[] = [

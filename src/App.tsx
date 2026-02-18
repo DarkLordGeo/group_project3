@@ -18,7 +18,6 @@ import Router from './routes/Router'
 //   }),
 // }));
 
-
 function App() {
 
 
@@ -26,9 +25,9 @@ function App() {
     <>
       {/* <div> */}
 
-        {/* <Grid container spacing={12}> */}
-
-        <Router  />
+      {/* <Grid container spacing={12}> */}
+      {/* <Typography component="h1" variant='h6'>Courier management </Typography> */}
+      <Router />
       {/* </div> */}
 
     </>

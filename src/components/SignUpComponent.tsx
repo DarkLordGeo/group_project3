@@ -48,13 +48,10 @@ export default function SignUpComponent(props: { disableCustomTheme?: boolean })
     const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
     const [passwordError, setPasswordError] = React.useState(false);
     const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
-    const [nameError, setNameError] = React.useState(false);
-    const [nameErrorMessage, setNameErrorMessage] = React.useState('');
     console.log(props)
     const validateInputs = () => {
         const email = document.getElementById('email') as HTMLInputElement;
         const password = document.getElementById('password') as HTMLInputElement;
-        const name = document.getElementById('name') as HTMLInputElement;
 
         let isValid = true;
 
@@ -76,20 +73,11 @@ export default function SignUpComponent(props: { disableCustomTheme?: boolean })
             setPasswordErrorMessage('');
         }
 
-        if (!name.value || name.value.length < 1) {
-            setNameError(true);
-            setNameErrorMessage('Name is required.');
-            isValid = false;
-        } else {
-            setNameError(false);
-            setNameErrorMessage('');
-        }
-
         return isValid;
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        if (nameError || emailError || passwordError) {
+        if (emailError || passwordError) {
             event.preventDefault();
             return;
         }
@@ -104,14 +92,15 @@ export default function SignUpComponent(props: { disableCustomTheme?: boolean })
 
     return (
         <>
-            <div style={{marginTop:'50px'}}>
+            <div style={{ marginTop: '50px' }}>
+                {/* <Typography component="h1" variant='h2'>Courier management </Typography> */}
                 <Card variant="outlined">
                     <Typography
-                        component="h1"
+                        component="h2"
                         variant="h4"
                         sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)', textAlign: 'center' }}
                     >
-                        Sign up
+                        Sign in to your account
                     </Typography>
                     <Typography
                         component="h1"
@@ -143,20 +132,7 @@ export default function SignUpComponent(props: { disableCustomTheme?: boolean })
                                 <MenuItem value={30}>courier</MenuItem>
                             </Select>
                         </FormControl>
-                        <FormControl>
-                            <FormLabel htmlFor="name">Full name</FormLabel>
-                            <TextField
-                                autoComplete="name"
-                                name="name"
-                                required
-                                fullWidth
-                                id="name"
-                                placeholder="Jon Snow"
-                                error={nameError}
-                                helperText={nameErrorMessage}
-                                color={nameError ? 'error' : 'primary'}
-                            />
-                        </FormControl>
+
                         <FormControl>
                             <FormLabel htmlFor="email">Email</FormLabel>
                             <TextField
