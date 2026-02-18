@@ -71,15 +71,13 @@ export default function RegisterComponent() {
             from: '',
             to: ''
         }])
-        // setSchedule({...schedule, work_day: schedule.work_day += 1})
-        // , date: { day: '', from: '', to: '' }
-        // setSchedule({ ...schedule, work_day: schedule.work_day += 1, work_day_id: schedule.work_day_id = id })
+        console.log(schedule)
+  
     }
 
     const removeSchedule = (id: number) => {
-        // console.log(schedule.work_day)
         const removedSchedule = schedule.filter((_, index) => index !== id)
-        // console.log(schedule)
+        console.log('removed schedule: ',removedSchedule)
         setSchedule(removedSchedule)
     }
     // console.log(schedule)
@@ -319,6 +317,7 @@ export default function RegisterComponent() {
 
                                     {schedule.map((item, id) => (
                                         <Box sx={{ display: 'flex', justifyContent: 'space-evenly', gap: 0, alignItems: 'center' }}>
+                                            {id}
                                             <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, alignItems: 'center' }}>
                                                 <FormControl fullWidth>
                                                     <FormLabel>Select date</FormLabel>
